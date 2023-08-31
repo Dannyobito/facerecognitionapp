@@ -19,19 +19,26 @@ class App extends Component{
     super();
     this.state = {
       input: '',
+      imageUrl: '',
+      box: {},
     }
   }
 
+
+  calculateFaceLocation = (data)=> {
+     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box
+  }
+
   onInputChange = (event) =>{
-    console.log(event.target.value);
+    this.setState({input:event.target.value});
     
   }
   onSubmit = () =>{
-    console.log('clicked');
-    app.models.predict('face-detection', 'https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2080&q=80')
+    this.setState({imageUrl:this.state.input})
+    app.models.predict('face-detection', this.state.input)
     .then(response => {
-        console.log(response)
-          }).catch(err => console.log(err));
+      this.calculateFaceLocation(response)
+    }).catch(err => console.log(err));
   }
   
 
@@ -43,7 +50,7 @@ class App extends Component{
         <Logo/>
         <Rank />
         <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-        <FaceRecognition/>
+        <FaceRecognition imageUrl={this.state.imageUrl}/>
       </div>
     )
   }
