@@ -1,11 +1,13 @@
 import React from "react";
 import { Tilt } from "react-tilt";
+import logo from "./logo.jpg";
+import './Logo.css'
 
 
 const Logo = () => {
     const defaultOptions = {
         reverse:        false,  // reverse the tilt direction
-        max:            35,     // max tilt rotation (degrees)
+        max:            85,     // max tilt rotation (degrees)
         perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
         scale:          1.1,    // 2 = 200%, 1.5 = 150%, etc..
         speed:          1000,   // Speed of the enter/exit transition
@@ -15,9 +17,13 @@ const Logo = () => {
         easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     }
     return(
-    <Tilt options={defaultOptions} style={{ height: 250, width: 250 }}>
-      <div className="Tilt-inner">👽</div>
-    </Tilt>
+      <div className="p-12">
+        <Tilt options={defaultOptions} style={{ width: 120,  height: 160 }}>
+          <div className="Tilt-inner">
+            <img className="shadow shadow-lg" alt="logo" src={logo}/>
+          </div>
+        </Tilt>
+      </div>
     )
 }
 
