@@ -22,7 +22,7 @@ class App extends Component{
     this.state = {
       input: '',
       imageUrl: '',
-      box: {},
+      boxes:[],
       isSignedIn: false,
       route: 'signin'
     }
@@ -40,19 +40,26 @@ class App extends Component{
   }
 
   calculateFaceLocation = (data)=> {
-     const clarifaiFaceBox = data.outputs[0].data.regions[0].region_info.bounding_box;
+     const regions = data.outputs[0].data.regions;
      const face = document.getElementById('face');
      const imageWidth = Number(face.width);
      const imageHeight = Number(face.height);
-     return {
-      left: clarifaiFaceBox.left_col*imageWidth,
-      top: clarifaiFaceBox.top_row * imageHeight,
-      right: imageWidth-(clarifaiFaceBox.right_col*imageWidth),
-      bottom: imageHeight-(clarifaiFaceBox.bottom_row * imageHeight),
-     };
+     let clarifaiFaceBoxes = regions.map((box)=>{
+      console.log('region',box);
+      let clarifaiFaceBox = box.region_info.bounding_box;
+      console.log('cfb',clarifaiFaceBox);
+      return {
+        left: clarifaiFaceBox.left_col*imageWidth,
+        top: clarifaiFaceBox.top_row * imageHeight,
+        right: imageWidth-(clarifaiFaceBox.right_col*imageWidth),
+        bottom: imageHeight-(clarifaiFaceBox.bottom_row * imageHeight),
+      };
+     })
+     return clarifaiFaceBoxes;
   }
-  displayFaceBox = (box) => {
-    this.setState({box:box})
+  displayFaceBox = (boxes) => {
+    console.log('dfbboxes',boxes);
+    this.setState({boxes:boxes})
   }
   onInputChange = (event) =>{
     this.setState({input:event.target.value});
@@ -76,7 +83,7 @@ class App extends Component{
           <Logo/>
           <Rank />
           <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-          <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
+          <FaceRecognition imageUrl={this.state.imageUrl} boxes={this.state.boxes}/>
         </div>
       )
     }
