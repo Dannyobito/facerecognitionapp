@@ -7,7 +7,7 @@ import './Logo.css'
 const Logo = () => {
     const defaultOptions = {
         reverse:        false,  // reverse the tilt direction
-        max:            85,     // max tilt rotation (degrees)
+        max:            70,     // max tilt rotation (degrees)
         perspective:    1000,   // Transform perspective, the lower the more extreme the tilt gets.
         scale:          1.1,    // 2 = 200%, 1.5 = 150%, etc..
         speed:          1000,   // Speed of the enter/exit transition

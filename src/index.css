@@ -3,7 +3,7 @@
 @tailwind utilities;
 body{
     margin: 0;
-    background: linear-gradient(89deg, #00065B 0%, #4837A9 100%);
+    background: linear-gradient(89deg, #00065B, #4837A9);
     color: white;
     font-family: 'Courier New', Courier, monospace;
     min-height: 100vh;
