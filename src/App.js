@@ -6,6 +6,8 @@ import Nav from './components/Nav/Nav';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
+import SignIn from './components/SignIn/SignIn';
+import Register from './components/Register/Register';
 import './App.css';
 
 //You must add your own API key here from Clarifai.
@@ -21,16 +23,27 @@ class App extends Component{
       input: '',
       imageUrl: '',
       box: {},
+      isSignedIn: false,
+      route: 'signin'
     }
   }
 
+
+  onRouteChange = (route) => {
+    this.setState({route:route});
+    if(route === 'signin'){
+      this.setState({isSignedIn:false});
+    }
+    if(route === 'home'){
+      this.setState({isSignedIn:true});
+    }
+  }
 
   calculateFaceLocation = (data)=> {
      const clarifaiFaceBox = data.outputs[0].data.regions[0].region_info.bounding_box;
      const face = document.getElementById('face');
      const imageWidth = Number(face.width);
      const imageHeight = Number(face.height);
-     console.log(imageHeight,imageWidth);
      return {
       left: clarifaiFaceBox.left_col*imageWidth,
       top: clarifaiFaceBox.top_row * imageHeight,
@@ -55,16 +68,28 @@ class App extends Component{
   
 
   render() {
-    return(
-      <div className="App">
-        <ParticlesBg type="cobweb" bg={true} />
-        <Nav />
-        <Logo/>
-        <Rank />
-        <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
-        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
-      </div>
-    )
+    if(this.state.route === 'home' ||this.state.isSignedIn === true) {
+      return(
+        <div className="App">
+          <ParticlesBg type="cobweb" bg={true}/>
+          <Nav onRouteChange={this.onRouteChange}/>
+          <Logo/>
+          <Rank />
+          <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
+          <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box}/>
+        </div>
+      )
+    }
+    else if(this.state.route === 'signin' && this.state.isSignedIn === false){
+      return(
+        <SignIn onRouteChange={this.onRouteChange}/>
+      )
+    }
+    else if(this.state.route === 'register' && this.state.isSignedIn === false){
+      return(
+        <Register onRouteChange={this.onRouteChange}/>
+      )
+    }
   }
 }
 
