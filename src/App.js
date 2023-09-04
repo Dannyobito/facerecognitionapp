@@ -27,7 +27,7 @@ class App extends Component{
       route: 'signin'
     }
   }
-
+  
 
   onRouteChange = (route) => {
     this.setState({route:route});
@@ -89,12 +89,20 @@ class App extends Component{
     }
     else if(this.state.route === 'signin' && this.state.isSignedIn === false){
       return(
-        <SignIn onRouteChange={this.onRouteChange}/>
+        <div className='App'>
+          <ParticlesBg type="cobweb" bg={true}/>
+          <SignIn onRouteChange={this.onRouteChange}/>
+        </div>
+        
       )
     }
     else if(this.state.route === 'register' && this.state.isSignedIn === false){
       return(
-        <Register onRouteChange={this.onRouteChange}/>
+        <div>
+          <ParticlesBg type="cobweb" bg={true}/>
+          <Register onRouteChange={this.onRouteChange}/>
+        </div>
+        
       )
     }
   }
