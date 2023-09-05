@@ -113,7 +113,7 @@ class App extends Component{
       return(
         <div className='App'>
           <ParticlesBg type="cobweb" bg={true}/>
-          <SignIn onRouteChange={this.onRouteChange}/>
+          <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         </div>
         
       )
