@@ -24,11 +24,27 @@ class App extends Component{
       imageUrl: '',
       boxes:[],
       isSignedIn: false,
-      route: 'signin'
+      route: 'signin',
+      user:{
+        id: '',
+        username: '',
+        email: '',
+        entries: 0,
+        joined: ''
+      }
     }
   }
   
+  loadUser = (data) => {
+    this.setState({user: {
+      id: data.id,
+      username: data.name,
+      email: data.email,
+      entries: data.entries,
+      joined: data.joined,
 
+    }})
+  }
   onRouteChange = (route) => {
     this.setState({route:route});
     if(route === 'signin'){
@@ -45,9 +61,7 @@ class App extends Component{
      const imageWidth = Number(face.width);
      const imageHeight = Number(face.height);
      let clarifaiFaceBoxes = regions.map((box)=>{
-      console.log('region',box);
       let clarifaiFaceBox = box.region_info.bounding_box;
-      console.log('cfb',clarifaiFaceBox);
       return {
         left: clarifaiFaceBox.left_col*imageWidth,
         top: clarifaiFaceBox.top_row * imageHeight,
@@ -58,7 +72,6 @@ class App extends Component{
      return clarifaiFaceBoxes;
   }
   displayFaceBox = (boxes) => {
-    console.log('dfbboxes',boxes);
     this.setState({boxes:boxes})
   }
   onInputChange = (event) =>{
@@ -69,6 +82,15 @@ class App extends Component{
     this.setState({imageUrl:this.state.input})
     app.models.predict('face-detection', this.state.input)
     .then(response => {
+      if(response){
+        fetch('http://localhost:3000/image',{
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id : this.state.user.id
+            })
+        })
+      }
       this.displayFaceBox(this.calculateFaceLocation(response));
     }).catch(err => console.log(err));
   }
@@ -81,7 +103,7 @@ class App extends Component{
           <ParticlesBg type="cobweb" bg={true}/>
           <Nav onRouteChange={this.onRouteChange}/>
           <Logo/>
-          <Rank />
+          <Rank user={this.state.user} />
           <ImageLinkForm onInputChange={this.onInputChange} onSubmit={this.onSubmit}/>
           <FaceRecognition imageUrl={this.state.imageUrl} boxes={this.state.boxes}/>
         </div>
@@ -100,7 +122,7 @@ class App extends Component{
       return(
         <div>
           <ParticlesBg type="cobweb" bg={true}/>
-          <Register onRouteChange={this.onRouteChange}/>
+          <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         </div>
         
       )
