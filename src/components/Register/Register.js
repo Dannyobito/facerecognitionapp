@@ -20,23 +20,24 @@ class Register extends React.Component {
         this.setState({password: event.target.value})
     }
     onSubmitRegister = () => {
-        fetch('http://localhost:3000/register',{
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                name: this.state.username,
-                email: this.state.email,
-                password: this.state.password
-            })
-        })
-        .then(response => response.json())
-        .then(user=> {
-            if(user){
-                console.log(user);
-                this.props.loadUser(user);
-                this.props.onRouteChange('home')
-            }
-        })
+        // fetch('http://localhost:3000/register',{
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'application/json'},
+        //     body: JSON.stringify({
+        //         name: this.state.username,
+        //         email: this.state.email,
+        //         password: this.state.password
+        //     })
+        // })
+        // .then(response => response.json())
+        // .then(user=> {
+        //     if(user){
+        //         console.log(user);
+        //         this.props.loadUser(user);
+        //         this.props.onRouteChange('home')
+        //     }
+        // })
+        this.props.onRouteChange('home')
         
     }
     render(){
@@ -49,7 +50,7 @@ class Register extends React.Component {
                         <div className="mt-10">
                             <div className="p-10">
                                 <div className="mt-2 ">
-                                    <label htmlFor="username" className="text-white text-base font-normal">Email/Username:</label>
+                                    <label htmlFor="username" className="text-white text-base font-normal">Username:</label>
                                     <div className="flex my-3 items-center justify-between bg-zinc-100 rounded-lg ">
                                         <input 
                                             type="text" 

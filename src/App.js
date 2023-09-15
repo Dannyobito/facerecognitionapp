@@ -90,9 +90,13 @@ class App extends Component{
                 id : this.state.user.id
             })
         })
+        .then(response => response.json())
+        .then(count => {
+          this.setState(Object.assign(this.state.user, {entries:count}))
+        })
       }
       this.displayFaceBox(this.calculateFaceLocation(response));
-    }).catch(err => console.log(err));
+    }).catch(err => console.log(err))
   }
   
 
@@ -100,7 +104,7 @@ class App extends Component{
     if(this.state.route === 'home' ||this.state.isSignedIn === true) {
       return(
         <div className="App">
-          <ParticlesBg type="cobweb" bg={true}/>
+          <ParticlesBg type="cobweb" color="white" bg={true}/>
           <Nav onRouteChange={this.onRouteChange}/>
           <Logo/>
           <Rank user={this.state.user} />
@@ -112,7 +116,7 @@ class App extends Component{
     else if(this.state.route === 'signin' && this.state.isSignedIn === false){
       return(
         <div className='App'>
-          <ParticlesBg type="cobweb" bg={true}/>
+          <ParticlesBg type="cobweb" color="white" bg={true}/>
           <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         </div>
         
@@ -121,7 +125,7 @@ class App extends Component{
     else if(this.state.route === 'register' && this.state.isSignedIn === false){
       return(
         <div>
-          <ParticlesBg type="cobweb" bg={true}/>
+          <ParticlesBg type="cobweb" color="white" bg={true}/>
           <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
         </div>
         

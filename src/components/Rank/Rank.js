@@ -6,7 +6,7 @@ const Rank = ({user}) => {
     return(
         <div className="">
            <div className="text-white text-xl text-center">
-                {`${username}, your current rank is... ${entries}`}
+                {`${username}, your current entry count is ${entries}`}
            </div>
         </div>
     )
