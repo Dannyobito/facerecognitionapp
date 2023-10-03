@@ -1,6 +1,6 @@
 import React from "react";
 import Tilt from 'react-parallax-tilt';
-import logo from "./logo.jpg";
+import logo from "./logo.png";
 import './Logo.css'
 
 
@@ -17,10 +17,10 @@ const Logo = () => {
         easing:         "cubic-bezier(.03,.98,.52,.99)",    // Easing on enter/exit.
     }
     return(
-      <div className="p-12">
-        <Tilt options={defaultOptions} style={{ width: 120,  height: 160 }}>
+      <div className="p-6">
+        <Tilt options={defaultOptions} style={{ width: 200,  height: 200 }}>
           <div className="Tilt-inner">
-            <img className="shadow shadow-lg" alt="logo" src={logo}/>
+            <img className="shadow shadow-lg logo" alt="logo" src={logo}/>
           </div>
         </Tilt>
       </div>

@@ -48,7 +48,7 @@ class App extends Component{
   onRouteChange = (route) => {
     this.setState({route:route});
     if(route === 'signin'){
-      this.setState({isSignedIn:false});
+      this.setState({isSignedIn:false, imageUrl: ''});
     }
     if(route === 'home'){
       this.setState({isSignedIn:true});
@@ -83,7 +83,7 @@ class App extends Component{
     app.models.predict('face-detection', this.state.input)
     .then(response => {
       if(response){
-        fetch('http://localhost:3000/image',{
+        fetch('http://localhost:3999/image',{
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
