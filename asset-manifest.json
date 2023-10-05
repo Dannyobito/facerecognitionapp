@@ -1,14 +1,16 @@
 {
   "files": {
-    "main.css": "/facerecognitionapp/static/css/main.d37df897.css",
-    "main.js": "/facerecognitionapp/static/js/main.5f8e7242.js",
-    "static/media/logo.jpg": "/facerecognitionapp/static/media/logo.4e059cc69018fb2e4e3f.jpg",
+    "main.css": "/facerecognitionapp/static/css/main.5a4ce46f.css",
+    "main.js": "/facerecognitionapp/static/js/main.c34d1cfe.js",
+    "static/media/logo.png": "/facerecognitionapp/static/media/logo.eaf630915de1c4977fed.png",
+    "static/media/fraction.cjs": "/facerecognitionapp/static/media/fraction.a641cd80e2310e4e5e60.cjs",
     "index.html": "/facerecognitionapp/index.html",
-    "main.d37df897.css.map": "/facerecognitionapp/static/css/main.d37df897.css.map",
-    "main.5f8e7242.js.map": "/facerecognitionapp/static/js/main.5f8e7242.js.map"
+    "static/media/index.cjs": "/facerecognitionapp/static/media/index.cd351d7c31d0d3fccf96.cjs",
+    "main.5a4ce46f.css.map": "/facerecognitionapp/static/css/main.5a4ce46f.css.map",
+    "main.c34d1cfe.js.map": "/facerecognitionapp/static/js/main.c34d1cfe.js.map"
   },
   "entrypoints": [
-    "static/css/main.d37df897.css",
-    "static/js/main.5f8e7242.js"
+    "static/css/main.5a4ce46f.css",
+    "static/js/main.c34d1cfe.js"
   ]
 }
