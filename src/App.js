@@ -9,11 +9,12 @@ import Rank from './components/Rank/Rank';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import './App.css';
+import { data } from 'autoprefixer';
 
 //You must add your own API key here from Clarifai.
-const app = new Clarifai.App({
- apiKey: '08e96657bedd4606a49fcc5e187a2573'
-});
+// const app = new Clarifai.App({
+//  apiKey: '08e96657bedd4606a49fcc5e187a2573'
+// });
 
 
 class App extends Component{
@@ -80,9 +81,15 @@ class App extends Component{
   }
   onSubmit = () =>{
     this.setState({imageUrl:this.state.input})
-    app.models.predict('face-detection', this.state.input)
-    .then(response => {
-      if(response){
+    fetch('http://localhost:3999/imageUrl',{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+          imageUrl : this.state.input
+        })          
+      }).then(response => response.json())
+    .then(data => {
+      if(data){
         fetch('http://localhost:3999/image',{
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
@@ -95,7 +102,7 @@ class App extends Component{
           this.setState(Object.assign(this.state.user, {entries:count}))
         })
       }
-      this.displayFaceBox(this.calculateFaceLocation(response));
+      this.displayFaceBox(this.calculateFaceLocation(data));
     }).catch(err => console.log(err))
   }
   
