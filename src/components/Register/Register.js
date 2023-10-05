@@ -20,7 +20,7 @@ class Register extends React.Component {
         this.setState({password: event.target.value})
     }
     onSubmitRegister = () => {
-        fetch('http://localhost:3999/register',{
+        fetch('https://face-recognition-app-api-ricy.onrender.com/register',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -34,6 +34,9 @@ class Register extends React.Component {
             if(user.id){
                 this.props.loadUser(user);
                 this.props.onRouteChange('home')
+            }
+            else{
+                console.log(user);
             }
         })
         

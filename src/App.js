@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ParticlesBg from 'particles-bg'
-import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import Nav from './components/Nav/Nav';
 import Logo from './components/Logo/Logo';
@@ -9,12 +8,6 @@ import Rank from './components/Rank/Rank';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 import './App.css';
-import { data } from 'autoprefixer';
-
-//You must add your own API key here from Clarifai.
-// const app = new Clarifai.App({
-//  apiKey: '08e96657bedd4606a49fcc5e187a2573'
-// });
 
 
 class App extends Component{
@@ -81,7 +74,7 @@ class App extends Component{
   }
   onSubmit = () =>{
     this.setState({imageUrl:this.state.input})
-    fetch('http://localhost:3999/imageUrl',{
+    fetch('https://face-recognition-app-api-ricy.onrender.com/imageUrl',{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -90,7 +83,7 @@ class App extends Component{
       }).then(response => response.json())
     .then(data => {
       if(data){
-        fetch('http://localhost:3999/image',{
+        fetch('https://face-recognition-app-api-ricy.onrender.com/image',{
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
